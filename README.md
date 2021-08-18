@@ -1,11 +1,11 @@
 <h1 align="center"> GLOCASH PAY </h1>
 <p align="center"> glocash payment SDK for PHP</p>
-
-### 安装
+<h3 align="center"> <a href="https://docs.glocash.com">文档地址</a> </h3>
+## 安装
 ```php
 $ composer require chenrj/glocash
 ```
-### 配置
+## 配置
 配置信息 以及实例化
 ```php
 $config = [
@@ -16,7 +16,7 @@ $config = [
 ];
 $payment = new \glocash\Payment();
 ```
-### 发起交易
+## 发起交易
 ```php
 
 try{
@@ -46,7 +46,7 @@ try{
 
 
 ```
-### 发起退款
+## 发起退款
 ```
 $payment = new \glocash\Payment();
 try{
@@ -61,7 +61,7 @@ try{
     echo $e->getMessage();
 }
 ```
-### 交易查询
+## 交易查询
 ```
 $payment = new \glocash\Payment();
 try{
@@ -74,7 +74,7 @@ try{
     echo $e->getMessage();
 }
 ```
-### 异步通知
+## 异步通知
 ```
 try{
     //所有的状态更新都可以在这里操做
@@ -97,3 +97,5 @@ try{
     echo $e->getMessage();
 }
 ```
+
+
