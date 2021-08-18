@@ -1,6 +1,6 @@
 <h1 align="center"> GLOCASH PAY </h1>
 <p align="center"> glocash payment SDK for PHP</p>
-<h3 align="center"> <a href="https://docs.glocash.com">文档地址</a> </h3>
+<h3 align="center"> <a target="_blank" href="https://docs.glocash.com">文档地址</a> </h3>
 
 ## 安装
 ```php
