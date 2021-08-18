@@ -3,7 +3,7 @@
     "description": "glocash payment sdk",
     "authors": [
         {
-            "name": "tech",
+            "name": "chenrj",
             "email": "tech@glocash.com"
         }
     ],
@@ -12,5 +12,6 @@
         "psr-4": {
             "glocash\\": "src"
         }
-    }
+    },
+    "license": "MIT"
 }
