@@ -1,8 +1,5 @@
-## <center>GLOCASH PAY</center>
-
-##### <center>glocash payment SDK for PHP</center>
-
-
+<h1 align="center"> GLOCASH PAY </h1>
+<p align="center"> glocash payment SDK for PHP</p>
 
 ### 安装
 ```php
