@@ -1,0 +1,24 @@
+<?php
+include_once "../vendor/autoload.php";
+include_once "./config.php";
+$payment = new \glocash\Payment();
+try{
+    //所有的状态更新都可以在这里操做
+    $params =  $payment->setMchEmail($config['mchEmail'])->setApiKey($config['apiKey'])->notify();
+    //业务逻辑查找当前订单交易情况
+    if($params['PGW_NOTIFYTYPE'] == 'transaction'){
+        //判断是否是unpaid 状态
+        //更新状态操做
+
+    }else if($params['PGW_NOTIFYTYPE'] == 'refunded'){
+        //判断是否是paid refunding
+        //处理退款信息
+    }
+    $payment->log('支付成功');
+    echo 'success';
+    //接下来操做退款业务逻辑
+}catch ( \glocash\PaymentException $e){
+    $payment->log($e);
+    //记录错误信息
+    echo $e->getMessage();
+}

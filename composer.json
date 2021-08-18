@@ -1,0 +1,16 @@
+{
+    "name": "tech/glocash",
+    "description": "glocash payment sdk",
+    "authors": [
+        {
+            "name": "tech",
+            "email": "tech@glocash.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "glocash\\": "src"
+        }
+    }
+}
