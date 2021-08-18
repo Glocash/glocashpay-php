@@ -6,7 +6,7 @@
 
 ### 安装
 ```php
-$ composer require gocash/glocashpay
+$ composer require chenrj/glocash
 ```
 ### 配置
 配置信息 以及实例化
