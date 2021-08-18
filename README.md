@@ -1,14 +1,14 @@
-##<center>GLOCASH PAY</center>
+## <center>GLOCASH PAY</center>
 
 ##### <center>glocash payment SDK for PHP</center>
 
 
 
-###安装
+### 安装
 ```php
 $ composer require gocash/glocashpay
 ```
-###配置
+### 配置
 配置信息 以及实例化
 ```php
 $config = [
@@ -19,7 +19,7 @@ $config = [
 ];
 $payment = new \glocash\Payment();
 ```
-###发起交易
+### 发起交易
 ```php
 
 try{
@@ -49,7 +49,7 @@ try{
 
 
 ```
-###发起退款
+### 发起退款
 ```
 $payment = new \glocash\Payment();
 try{
@@ -64,7 +64,7 @@ try{
     echo $e->getMessage();
 }
 ```
-###交易查询
+### 交易查询
 ```
 $payment = new \glocash\Payment();
 try{
