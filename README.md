@@ -44,9 +44,8 @@ try{
     echo $e->getMessage();
 
 }
-
-
 ```
+
 ## 发起退款
 ```
 $payment = new \glocash\Payment();

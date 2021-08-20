@@ -18,6 +18,22 @@ class Payment
     const PAYMENT_URL = '/gateway/payment/index';
     const QUERY_URL = '/gateway/transaction/index';
     const REFUND_URL = '/gateway/transaction/refund';
+    protected $base_url = "";
+
+
+    /**
+     * @param $base_url
+     * @return $this
+     */
+    public function setBaseUrl($base_url): Payment
+    {
+        //预留设置url入口 防止地址变化
+        $this->base_url = $base_url;
+        return $this;
+    }
+
+
+
 
     /**
      * @return bool
@@ -82,6 +98,7 @@ class Payment
     private function getURl($url): string
     {
         $baseUrl = $this->sandbox ? self::SANDBOX_URL : self::LIVE_URL;
+        $baseUrl = empty($this->base_url)?$baseUrl:$this->base_url;
         return $baseUrl . $url;
     }
 
@@ -94,6 +111,7 @@ class Payment
 
     public function create($data)
     {
+        $this->log('----------------create transaction--------------------------');
         $this->checkMerchantConfig();
         $url = $this->getURl(self::PAYMENT_URL);
         $data['REQ_SANDBOX'] = (int)$this->sandbox;
@@ -113,10 +131,10 @@ class Payment
             throw new PaymentException(PaymentException::BIL_CURRENCY_MUST, PaymentException::CODE_BAD_REQUEST);
         }
         $data['REQ_SIGN'] = $this->makeSign($data, self::TYPE_CREATE);
-        $this->log($url);
-        $this->log($data);
+        $this->log('request url: '.$url);
+        $this->log('request data: '.json_encode($data));
         $result = $this->curl_request($url, $data);
-        $this->log($result);
+        $this->log('response data: '.$result);
         $result = json_decode($result, true);
         if (isset($result['REQ_ERROR']) && empty(!$result['REQ_ERROR'])) {
             throw new PaymentException($result['REQ_ERROR'], PaymentException::CODE_REQUEST_FAILED);
@@ -126,13 +144,14 @@ class Payment
 
     public function query(string $gcid)
     {
+        $this->log('----------------query--------------------------');
         $data['REQ_EMAIL'] = $this->mchEmail;
         $data['TNS_GCID'] = $gcid;
         $data['REQ_TIMES'] = time();
         $data['REQ_SIGN'] = $this->makeSign($data, self::TYPE_QUERY);
         $url = $this->getURl(self::QUERY_URL);
         $result = $this->curl_request($url, $data);
-        $this->log($result);
+        $this->log('response data: '.$result);
         if (empty($result)) {
             return [];
         }
@@ -141,7 +160,7 @@ class Payment
 
     public function refunded(string $tns_id, $amount)
     {
-
+        $this->log('----------------refunded--------------------------');
         if (empty($tns_id)) {
             throw new PaymentException(PaymentException::GCID_MUST, PaymentException::CODE_BAD_REQUEST);
         }
@@ -169,9 +188,10 @@ class Payment
 
     public function notify()
     {
+        $this->log('----------------notify--------------------------');
         $params = $_POST;
         $this->verifySign($params);
-        $this->log('异步通知' . var_export($params, true));
+        $this->log('notify: ' . json_encode($params));
         $status = $params['BIL_STATUS'] ?? '';
         $gcid = $params['TNS_GCID'] ?? '';
         if (empty($status) || empty($gcid)) {
@@ -209,7 +229,7 @@ class Payment
                 $signString = $this->apiKey . $data['REQ_TIMES'] . $data['REQ_EMAIL'] . $data['CUS_EMAIL'] . $data['TNS_GCID'] . $data['BIL_STATUS'] . $data['BIL_METHOD'] . $data['PGW_PRICE'] . $data['PGW_CURRENCY'];
                 break;
         }
-        $this->log('签名类型' . $type . var_export($signString, true));
+        $this->log('sign type：' . $type .'-sign string：'. $signString);
         return hash('sha256', $signString);
     }
 
@@ -227,7 +247,7 @@ class Payment
                 curl_setopt($ch, CURLOPT_POST, true);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
             }
-            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 60);
             $result = curl_exec($ch);
             if ($result === false) {
                 return curl_error($ch);
@@ -287,7 +307,7 @@ class PaymentException extends \Exception
      */
     CONST CODE_SERVER_ERRORS = 500;
 
-    const SIGN_NULL = 'merchant email or apiKey is NULL';
+    const SIGN_NULL = 'merchant email or apiKey is null';
     const EMAIL_MUST = 'email is  must';
     const BIL_GOODSNAME_MUST = 'bil_goodsname is must';
     const BIL_PRICE_MUST = 'bil_price is must';

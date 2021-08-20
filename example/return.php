@@ -6,7 +6,7 @@ try{
     echo "<pre>";
     print_r($_POST);
     echo "</pre>";
-    //付款结束的结果页面 或者是3ds 返回的页面
+    //TODO 付款结束的结果页面 或者是3ds 返回的页面
     $params =  $payment->setMchEmail($config['mchEmail'])->setApiKey($config['apiKey'])->notify();
     //业务逻辑查找当前订单交易情况
     if($params['PGW_NOTIFYTYPE'] == 'transaction'){

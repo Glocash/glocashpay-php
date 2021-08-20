@@ -2,6 +2,7 @@
 include_once "../vendor/autoload.php";
 include_once "./config.php";
 $payment = new \glocash\Payment();
+$payment = $payment->setMchEmail($config['mchEmail'])->setApiKey($config['apiKey']);
 try{
     $data['REQ_INVOICE']  = 'test123'.rand(1000,9999); //订单号
     $data['BIL_GOODSNAME']   = 'goods1Name*1;goods2Name*3'; //TODO 商户名称 请如实填写 否则银行结算会盘查
@@ -12,12 +13,17 @@ try{
     $data['URL_NOTIFY']   = 'http://www.crjblog.cn/notify.php';//异步通知地址 必须在白名单中 也可以在商户后台指定
     $data['URL_SUCCESS']   = 'http://www.crjblog.cn/return.php?status=success';//异步通知地址 必须在白名单中 也可以在商户后台指定
     $data['URL_FAILED']   = 'http://www.crjblog.cn/return.php?status=error';//异步通知地址 必须在白名单中 也可以在商户后台指定
-    $result =  $payment->setMchEmail($config['mchEmail'])->setApiKey($config['apiKey'])
-        ->setChannel('C01')
+    $result =  $payment->setChannel('C01')
         ->create($data);
     echo "<pre>";
     print_r($result);
     echo "</pre>";
+    //预期会返回下面的内容
+    //    Array
+    //    (
+    //        [TNS_GCID] => C01XV142VAEH9AW2
+    //        [URL_PAYMENT] => https://pay1.glocash.com/gateway/payment/index/token/xxxxxxxxxxxxxxxxxxxxxxxxx
+    //    )
     //保存gcid 和支付链接
 }catch ( \glocash\PaymentException $e){
     $payment->log($e);
