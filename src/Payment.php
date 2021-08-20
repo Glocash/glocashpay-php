@@ -310,7 +310,7 @@ class PaymentException extends \Exception
     const BIL_GOODSNAME_MUST = 'bil_goodsname is must';
     const BIL_PRICE_MUST = 'bil_price is must';
     const BIL_CURRENCY_MUST = 'bil_currency is must';
-    const GCID_MUST = 'gcid is  MUST';
+    const GCID_MUST = 'gcid is  must';
     const AMOUNT_GT0 = 'amount mast greater than 0';
     const SIGN_ERROR = 'sign is failed';
     const PARAM_ERROR = 'param is failed';
