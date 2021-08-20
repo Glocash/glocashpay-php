@@ -33,8 +33,6 @@ class Payment
     }
 
 
-
-
     /**
      * @return bool
      */
@@ -98,7 +96,7 @@ class Payment
     private function getURl($url): string
     {
         $baseUrl = $this->sandbox ? self::SANDBOX_URL : self::LIVE_URL;
-        $baseUrl = empty($this->base_url)?$baseUrl:$this->base_url;
+        $baseUrl = empty($this->base_url) ? $baseUrl : $this->base_url;
         return $baseUrl . $url;
     }
 
@@ -131,10 +129,10 @@ class Payment
             throw new PaymentException(PaymentException::BIL_CURRENCY_MUST, PaymentException::CODE_BAD_REQUEST);
         }
         $data['REQ_SIGN'] = $this->makeSign($data, self::TYPE_CREATE);
-        $this->log('request url: '.$url);
-        $this->log('request data: '.json_encode($data));
+        $this->log('request url: ' . $url);
+        $this->log('request data: ' . json_encode($data));
         $result = $this->curl_request($url, $data);
-        $this->log('response data: '.$result);
+        $this->log('response data: ' . $result);
         $result = json_decode($result, true);
         if (isset($result['REQ_ERROR']) && empty(!$result['REQ_ERROR'])) {
             throw new PaymentException($result['REQ_ERROR'], PaymentException::CODE_REQUEST_FAILED);
@@ -151,7 +149,7 @@ class Payment
         $data['REQ_SIGN'] = $this->makeSign($data, self::TYPE_QUERY);
         $url = $this->getURl(self::QUERY_URL);
         $result = $this->curl_request($url, $data);
-        $this->log('response data: '.$result);
+        $this->log('response data: ' . $result);
         if (empty($result)) {
             return [];
         }
@@ -229,7 +227,7 @@ class Payment
                 $signString = $this->apiKey . $data['REQ_TIMES'] . $data['REQ_EMAIL'] . $data['CUS_EMAIL'] . $data['TNS_GCID'] . $data['BIL_STATUS'] . $data['BIL_METHOD'] . $data['PGW_PRICE'] . $data['PGW_CURRENCY'];
                 break;
         }
-        $this->log('sign type：' . $type .'-sign string：'. $signString);
+        $this->log('sign type：' . $type . '-sign string：' . $signString);
         return hash('sha256', $signString);
     }
 
