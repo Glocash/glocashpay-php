@@ -22,6 +22,7 @@ $payment = new \glocash\Payment();
 
 try{
     $data['REQ_INVOICE']  = 'test123'.rand(1000,9999); //订单号
+    $data['REQ_APPID']  = 380; //应用ID
     $data['BIL_GOODSNAME']   = 'goods1Name*1;goods2Name*3'; //TODO 商户名称 请如实填写 
     $data['CUS_EMAIL']    = 'rongjiang.chen@witsion.com'; //客户邮箱
     $data['BIL_PRICE']    = '9.9'; //价格

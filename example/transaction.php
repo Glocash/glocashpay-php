@@ -1,5 +1,5 @@
 <?php
-include_once "../vendor/autoload.php";
+include_once "../vendor/autoload.php"; //按实际路径引入
 include_once "./config.php";
 $payment = new \glocash\Payment();
 $payment = $payment->setMchEmail($config['mchEmail'])->setApiKey($config['apiKey']);
