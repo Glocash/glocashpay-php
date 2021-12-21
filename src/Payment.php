@@ -273,37 +273,37 @@ class PaymentException extends \Exception
     /**
      * 正常返回
      */
-    CONST CODE_SUCCESS = 200;
+    const CODE_SUCCESS = 200;
 
     /**
      * 参数缺失
      */
-    CONST CODE_BAD_REQUEST = 400;
+    const CODE_BAD_REQUEST = 400;
 
     /**
      * 验证失败
      */
-    CONST CODE_UNAUTHORIZED = 401;
+    const CODE_UNAUTHORIZED = 401;
 
     /**
      * 请求业务类型错误
      */
-    CONST CODE_REQUEST_FAILED = 402;
+    const CODE_REQUEST_FAILED = 402;
 
     /**
      * 接口限制
      */
-    CONST CODE_FORBIDDEN = 403;
+    const CODE_FORBIDDEN = 403;
 
     /**
      * 资源不存在
      */
-    CONST CODE_NOT_FOUND = 404;
+    const CODE_NOT_FOUND = 404;
 
     /**
      * 系统内部错误
      */
-    CONST CODE_SERVER_ERRORS = 500;
+    const CODE_SERVER_ERRORS = 500;
 
     const SIGN_NULL = 'merchant email or apiKey is null';
     const EMAIL_MUST = 'email is  must';
@@ -311,7 +311,7 @@ class PaymentException extends \Exception
     const BIL_PRICE_MUST = 'bil_price is must';
     const BIL_CURRENCY_MUST = 'bil_currency is must';
     const GCID_MUST = 'gcid is  must';
-    const AMOUNT_GT0 = 'amount mast greater than 0';
+    const AMOUNT_GT0 = 'amount must greater than 0';
     const SIGN_ERROR = 'sign is failed';
     const PARAM_ERROR = 'param is failed';
 }
