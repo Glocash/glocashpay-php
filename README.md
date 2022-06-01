@@ -4,7 +4,7 @@
 
 ## 安装
 ```php
-$ composer require chenrj/glocash
+$ composer update
 ```
 ## 配置
 配置信息 以及实例化
