@@ -18,6 +18,9 @@ class Payment
     const PAYMENT_URL = '/gateway/payment/index';
     const QUERY_URL = '/gateway/transaction/index';
     const REFUND_URL = '/gateway/transaction/refund';
+    const DIRECT_URL = '/gateway/payment/ccdirect';
+    const EMBED_URL = '/gateway/payment/ccdirect';
+    const CHECKOUT_URL = '/gateway/paymentv2/checkout';
     protected $base_url = "";
 
 
@@ -107,11 +110,18 @@ class Payment
         }
     }
 
-    public function create($data)
+    public function create($data, $type=1)
     {
         $this->log('----------------create transaction--------------------------');
         $this->checkMerchantConfig();
         $url = $this->getURl(self::PAYMENT_URL);
+        if ($type == 2) {
+            $url = $this->getURl(self::DIRECT_URL);
+        } else if ($type == 3) {
+            $url = $this->getURl(self::EMBED_URL);
+        } else if ($type == 4) {
+            $url = $this->getURl(self::CHECKOUT_URL);
+        }
         $data['REQ_SANDBOX'] = (int)$this->sandbox;
         $data['REQ_EMAIL'] = $this->mchEmail;
         $data['BIL_METHOD'] = $this->channel;
