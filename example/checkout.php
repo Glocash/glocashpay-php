@@ -21,5 +21,4 @@ try{
     $payment->log($e);
     //记录错误信息
     echo $e->getMessage();
-
 }
