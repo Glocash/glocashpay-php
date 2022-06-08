@@ -17,8 +17,15 @@ try{
     $data['URL_SUCCESS'] = 'http://www.crjblog.cn/return.php?status=success';//异步通知地址 必须在白名单中 也可以在商户后台指定
     $data['URL_FAILED'] = 'http://www.crjblog.cn/return.php?status=error';//异步通知地址 必须在白名单中 也可以在商户后台指定
     $data['BIL_TEMP_TOKEN'] = '9fa3001597706e2c2a63cb55442b3e257b8e8d9fec629f43822f67d87d5af872'; //信用卡对应的临时TOKEN
+    if (!empty($_REQUEST['BIL_TEMP_TOKEN'])) {
+        $data['BIL_TEMP_TOKEN'] = $_REQUEST['BIL_TEMP_TOKEN']; //信用卡对应的token
+    }
+    if (!empty($_REQUEST['BIL_TOKEN'])) {
+        $data['BIL_TOKEN'] = $_REQUEST['BIL_TOKEN']; //信用卡对应的token
+    }
     $result =  $payment->setChannel('C01')->create($data,3);
-    echo "<pre>"; print_r($result); echo "</pre>";
+    echo json_encode(['data' => $result]);
+    die();
 }catch ( \glocash\PaymentException $e){
     $payment->log($e);
     //记录错误信息
