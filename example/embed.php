@@ -9,7 +9,7 @@ try{
     $data['REQ_TYPE'] = 'website'; //请求类型
     $data['BIL_GOODSNAME'] = 'goods1Name×1;goods2Name×3'; //TODO 商户名称 请如实填写 否则银行结算会盘查
     $data['CUS_EMAIL'] = 'rongjiang.chen@witsion.com'; //客户邮箱
-    $data['BIL_PRICE'] = '9.9'; //价格
+    $data['BIL_PRICE'] = '87'; //价格
     $data['BIL_CURRENCY'] = 'USD'; //币种
     $data['BIL_CC3DS'] = 1; //是否开启3ds 1 开启 0 不开启
     $data['BIL_IPADDR'] = '58.247.45.36'; //客户ip地址
